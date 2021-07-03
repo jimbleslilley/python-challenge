@@ -18,12 +18,20 @@ with open(budget_csv, 'r') as csvfile:
 
     for i, row in enumerate(csvreader):
         storedvalues.append(int(row[1]))
-
     months = i + 1
 
-    maxval = max(storedvalues)
-    minval = min(storedvalues)
-    maxrow = storedvalues.index(max(storedvalues))+2
-    minrow = storedvalues.index(min(storedvalues))+2
+maxrow = storedvalues.index(max(storedvalues))+1
+minrow = storedvalues.index(min(storedvalues))+1
+maxval = max(storedvalues)
+minval = min(storedvalues)
+average = sum(storedvalues) / months
 
-    average = sum(storedvalues) / months
+with open(budget_csv, 'r') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+    for i, row in enumerate(csvreader):
+        if i == maxrow:
+            maxdate = row[0]
+            print(f"Greatest Increase In Profits: {maxdate} (${maxval})")
+        elif i == minrow:
+            mindate = row[0]
+            print(f"Greatest Deacrease In Profits: {mindate} (${minval})")
