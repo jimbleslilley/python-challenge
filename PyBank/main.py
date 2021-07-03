@@ -5,6 +5,11 @@
 import csv
 import os
 
+storedvalues = []
+
+
+i = 0
+
 budget_csv = os.path.join("Resources", "budget_data.csv")
 
 # Read in the CSV file
@@ -13,4 +18,12 @@ with open(budget_csv, 'r') as csvfile:
     header = next(csvreader)
 
     for row in csvreader:
-        print(row)
+        storedvalues.append(int(row[1]))
+        i = i + 1
+
+months = i
+
+print(storedvalues.index(max(storedvalues)))
+print(storedvalues.index(min(storedvalues)))
+print(max(storedvalues))
+print(min(storedvalues))
