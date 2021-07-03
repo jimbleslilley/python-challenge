@@ -2,28 +2,28 @@
 #my script needs to find the largest and smallest number on a given row
 #my script needs to figure out the number of months on the sheet, by counting the number of unqiue rows
 
+#consider assigning values to dict, searching dict for value then returning date? 
+
 import csv
 import os
 
 storedvalues = []
 
-
-i = 0
-
 budget_csv = os.path.join("Resources", "budget_data.csv")
 
-# Read in the CSV file
+
 with open(budget_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)
 
-    for row in csvreader:
+    for i, row in enumerate(csvreader):
         storedvalues.append(int(row[1]))
-        i = i + 1
 
-months = i
+    months = i + 1
 
-print(storedvalues.index(max(storedvalues)))
-print(storedvalues.index(min(storedvalues)))
-print(max(storedvalues))
-print(min(storedvalues))
+    maxval = max(storedvalues)
+    minval = min(storedvalues)
+    maxrow = storedvalues.index(max(storedvalues))+2
+    minrow = storedvalues.index(min(storedvalues))+2
+
+    average = sum(storedvalues) / months
