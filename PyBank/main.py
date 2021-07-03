@@ -31,7 +31,17 @@ with open(budget_csv, 'r') as csvfile:
     for i, row in enumerate(csvreader):
         if i == maxrow:
             maxdate = row[0]
-            print(f"Greatest Increase In Profits: {maxdate} (${maxval})")
         elif i == minrow:
             mindate = row[0]
-            print(f"Greatest Deacrease In Profits: {mindate} (${minval})")
+
+    titleoutput = (f"Financial Analysis \n----------------------------\n")
+    totaloutput = (f"Total Months: {months}\nTotal: ${sum(storedvalues)}\n")    
+    averageoutput = (f"Average Change: ${round(average, 2)}\n")
+    minmaxoutput = (f"Greatest Increase In Profits: {maxdate} (${maxval})\nGreatest Deacrease In Profits: {mindate} (${minval})")
+    output = titleoutput + totaloutput + averageoutput + averageoutput + minmaxoutput 
+
+output_path = os.path.join(".", "Analysis", "pybankreport.txt")
+with open(output_path, 'w') as txtfile:
+    txtfile.write(output)
+    print(output)
+    
