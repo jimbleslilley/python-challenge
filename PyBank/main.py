@@ -2,6 +2,7 @@ import csv
 import os
 
 storedvalues = []
+monthlychange = []
 
 #retrieve values for sum, count rows to get months
 budget_csv = os.path.join("Resources", "budget_data.csv")
@@ -18,7 +19,16 @@ maxrow = storedvalues.index(max(storedvalues))+1
 minrow = storedvalues.index(min(storedvalues))+1
 maxval = max(storedvalues)
 minval = min(storedvalues)
-average = sum(storedvalues) / months
+
+#average calculations and defined
+d = 0
+h = 1
+while h < len(storedvalues):
+    monthlychange.append(storedvalues[h] - storedvalues[d])
+    d += 1
+    h += 1
+
+average = sum(monthlychange) / len(monthlychange)
 
 #go back through list to get the dates of max / min
 with open(budget_csv, 'r') as csvfile:
@@ -34,7 +44,7 @@ with open(budget_csv, 'r') as csvfile:
     totaloutput = (f"Total Months: {months}\nTotal: ${sum(storedvalues)}\n")    
     averageoutput = (f"Average Change: ${round(average, 2)}\n")
     minmaxoutput = (f"Greatest Increase In Profits: {maxdate} (${maxval})\nGreatest Deacrease In Profits: {mindate} (${minval})")
-    output = titleoutput + totaloutput + averageoutput + averageoutput + minmaxoutput 
+    output = titleoutput + totaloutput + averageoutput + minmaxoutput 
 
 #create txt file, print/send output
 output_path = os.path.join(".", "Analysis", "pybankreport.txt")
