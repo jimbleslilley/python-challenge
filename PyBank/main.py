@@ -26,7 +26,7 @@ h = 1
 while h < len(storedvalues):
     monthlychange.append(storedvalues[h] - storedvalues[d])
     d += 1
-    h += 1
+    h += 1  
 
 average = sum(monthlychange) / len(monthlychange)
 
