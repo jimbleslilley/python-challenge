@@ -13,26 +13,24 @@ with open(poll_csv, 'r') as csvfile:
     header = next(csvreader)
 
     #add each vote to votebox, add unique candidate to candidates
-    for i, row in enumerate(csvreader):
+    for i, row in enumerate(csvreader): 
         candidates.add(row[2])
         votebox.append([row[2]])
-        
+
+
 #check each list and count each candidates votes, store in dict
 for candidate in candidates:
     for vote in votebox:
         if candidate == ' '.join(vote):
-            i += 1
-    tally.update({candidate:i})
-    y += i
-    print(i)
-    print(y)
-    i = 0
-    print(i)
-    
+            y += 1
+    tally.update({candidate:y})
+    y = 0
+
+#https://stackoverflow.com/questions/613183/how-do-i-sort-a-dictionary-by-value
+placing = {k: v for k, v in sorted(tally.items(), key=lambda item: item[1])}
 
 totalvotes = (len(votebox))
-
-print(tally)
+print(placing)
 print(totalvotes)
 
 
